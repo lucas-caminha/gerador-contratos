@@ -1,7 +1,7 @@
 import { ContractFormData } from '../types'
 
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
+function formatDate(dateString: Date): string {
+  const date = dateString;
 
   if (isNaN(date.getTime())) {
     throw new Error("Data inválida");

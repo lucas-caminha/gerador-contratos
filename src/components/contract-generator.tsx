@@ -69,7 +69,8 @@ export default function ContractGenerator() {
       case 2:
         return <PartyInformation control={form.control} />
       case 3:
-        return <ContractPreview formData={form.getValues()} generateContract={generateContract} />
+        const formData = form.getValues() as ContractFormData
+        return <ContractPreview formData={formData} generateContract={generateContract} />
       default:
         return null
     }

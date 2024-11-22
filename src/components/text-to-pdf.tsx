@@ -1,5 +1,6 @@
-import React from 'react';
-import { Document, Page, Text, View, StyleSheet, PDFDownloadLink, Font } from '@react-pdf/renderer';
+import React, { useState, useEffect } from 'react';
+import { Document, Page, Text, View, StyleSheet, pdf, Font } from '@react-pdf/renderer';
+import { saveAs } from 'file-saver';
 
 // Registrar uma fonte personalizada
 Font.register({
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
 });
 
 // Componente para o conteúdo do PDF
-const PDFContent = ({ text }: { text: string }) => (
+const PDFContent: React.FC<{ text: string }> = ({ text }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
@@ -43,13 +44,24 @@ interface TextToPDFProps {
 }
 
 const TextToPDF: React.FC<TextToPDFProps> = ({ text, fileName = 'documento.pdf' }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const generatePDF = async () => {
+    const blob = await pdf(<PDFContent text={text} />).toBlob();
+    saveAs(blob, fileName);
+  };
+
+  if (!isClient) {
+    return null; // ou um placeholder, se preferir
+  }
+
   return (
     <div>
-      <PDFDownloadLink document={<PDFContent text={text} />} fileName={fileName}>
-        {({ blob, url, loading, error }) => 
-          loading ? 'Gerando PDF...' : 'Baixar PDF'
-        }
-      </PDFDownloadLink>
+      <button onClick={generatePDF}>Baixar PDF</button>
     </div>
   );
 };
