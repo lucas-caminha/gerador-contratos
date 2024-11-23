@@ -11,6 +11,7 @@ export interface ContractFormData {
   contratadoCpfCnpj: string
   valor: string
   prazo: string
+  prazoUnidade : string
   clausulasAdicionais: string
   cidade: string
   uf: string

@@ -29,6 +29,7 @@ const formSchema = z.object({
   contratadoCpfCnpj: z.string().min(1, "CPF/CNPJ é obrigatório"),
   valor: z.string().min(1, "Valor é obrigatório"),
   prazo: z.string().min(1, "Prazo é obrigatório"),
+  prazoUnidade: z.string().optional(),
   clausulasAdicionais: z.string().optional(),
   cidade: z.string().optional(),
   uf: z.string().optional(),

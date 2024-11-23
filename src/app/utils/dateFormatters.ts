@@ -1,8 +1,4 @@
-import { ContractFormData } from '../types'
-import { generatePrestacaoServicosContract } from '../app/contracts/prestacaoServicos'
-import { generateCompraVendaContract } from '../app/contracts/compraVenda'
-
-function formatDate(dateString: Date): string {
+export function formatDate(dateString: Date): string {
   const date = dateString;
 
   if (isNaN(date.getTime())) {
@@ -15,7 +11,7 @@ function formatDate(dateString: Date): string {
   return `${day}/${month}/${year}`;
 }
 
-function dataPorExtenso(date: Date): string {
+export function dataPorExtenso(date: Date): string {
   const meses = [
     "janeiro", "fevereiro", "março", "abril", "maio", "junho",
     "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
@@ -35,15 +31,3 @@ function dataPorExtenso(date: Date): string {
   return `${dia} de ${mesPorExtenso} de ${ano}`;
 }
 
-export function generateContract(formData: ContractFormData): string {
-  switch (formData.contractType.toLowerCase()) {
-    case 'servicos':
-      return generatePrestacaoServicosContract(formData)
-    case 'compravenda':
-      return generateCompraVendaContract(formData)
-    case 'locacao':
-      return generateCompraVendaContract(formData)
-    default:
-      throw new Error(`Tipo de contrato não suportado: ${formData.contractType}`)
-  }
-}
