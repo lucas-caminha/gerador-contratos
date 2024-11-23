@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { PartyType } from '../types'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { DatePicker } from "@/components/ui/date-picker"
-import ufs from '@/data/ufs';
+import ufs from '../data/UFS'
 import { useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
