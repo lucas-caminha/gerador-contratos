@@ -6,12 +6,22 @@ import { Textarea } from "@/components/ui/textarea"
 import { PartyType } from '../types'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { DatePicker } from "@/components/ui/date-picker"
+import ufs from '@/data/ufs';
+import { useState } from 'react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface PartyInformationProps {
   control: Control<any>
 }
 
 export function PartyInformation({ control }: PartyInformationProps) {
+
+  const [ufSelecionada, setUfSelecionada] = useState<string>("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setUfSelecionada(event.target.value);
+  };
+
   return (
     <div className="space-y-8">
       <Card>
@@ -36,11 +46,12 @@ export function PartyInformation({ control }: PartyInformationProps) {
             )}
           />
           
+          <div className="flex space-x-4">
           <Controller
             name="contratanteNome"
             control={control}
             render={({ field }) => (
-              <div className="space-y-2">
+              <div className="space-y-2 flex-1">
                 <Label htmlFor="contratanteNome">Nome/Razão Social do Contratante</Label>
                 <Input id="contratanteNome" {...field} className="w-full" />
               </div>
@@ -51,12 +62,14 @@ export function PartyInformation({ control }: PartyInformationProps) {
             name="contratanteCpfCnpj"
             control={control}
             render={({ field }) => (
-              <div className="space-y-2">
+              <div className="space-y-2 flex-1">
                 <Label htmlFor="contratanteCpfCnpj">CPF/CNPJ do Contratante</Label>
                 <Input id="contratanteCpfCnpj" {...field} className="w-full" />
               </div>
             )}
           />
+          </div>
+
         </CardContent>
       </Card>
 
@@ -82,11 +95,12 @@ export function PartyInformation({ control }: PartyInformationProps) {
             )}
           />
           
+          <div className="flex space-x-4">
           <Controller
             name="contratadoNome"
             control={control}
             render={({ field }) => (
-              <div className="space-y-2">
+              <div className="space-y-2 flex-1">
                 <Label htmlFor="contratadoNome">Nome/Razão Social do Contratado</Label>
                 <Input id="contratadoNome" {...field} className="w-full" />
               </div>
@@ -97,12 +111,13 @@ export function PartyInformation({ control }: PartyInformationProps) {
             name="contratadoCpfCnpj"
             control={control}
             render={({ field }) => (
-              <div className="space-y-2">
+              <div className="space-y-2 flex-1">
                 <Label htmlFor="contratadoCpfCnpj">CPF/CNPJ do Contratado</Label>
                 <Input id="contratadoCpfCnpj" {...field} className="w-full" />
               </div>
             )}
           />
+          </div>
         </CardContent>
       </Card>
 
@@ -117,7 +132,7 @@ export function PartyInformation({ control }: PartyInformationProps) {
             render={({ field }) => (
               <div className="space-y-2">
                 <Label htmlFor="valor">Valor do Contrato</Label>
-                <Input id="valor" {...field} className="w-full" placeholder="R$ 0,00" />
+                <Input id="valor" type='text' {...field} className="w-full" placeholder="R$ 0,00" />
               </div>
             )}
           />
@@ -133,28 +148,86 @@ export function PartyInformation({ control }: PartyInformationProps) {
             )}
           />
 
-          <Controller
-            name="cidade"
-            control={control}
-            render={({ field }) => (
-              <div className="space-y-2">
-                <Label htmlFor="cidade">Cidade</Label>
-                <Input id="cidade" {...field} className="w-full" />
+          <div className="flex space-x-4">
+            <Controller
+              name="dtInicialPrazo"
+              control={control}
+              render={({ field }) => (
+                <div className="space-y-2 flex-1">
+                  <Label htmlFor="dtInicialPrazo">Data inicial do prazo</Label>
+                  <DatePicker
+                    date={field.value}
+                    setDate={(date) => field.onChange(date)}
+                  />
               </div>
-            )}
-          />
+              )}
+            />
+
+            <Controller
+              name="dtFinalPrazo"
+              control={control}
+              render={({ field }) => (
+                <div className="space-y-2 flex-1">
+                  <Label htmlFor="dtFinalPrazo">Data final do prazo</Label>
+                  <DatePicker
+                    date={field.value}
+                    setDate={(date) => field.onChange(date)}
+                  />
+              </div>
+              )}
+            />
+          </div>
+
+          <div className="flex space-x-4">
+            <Controller 
+              name='uf'
+              control={control}
+              render={({field}) => (
+                <div className="space-y-2 flex-1">
+                  <Label htmlFor="uf">UF</Label>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <SelectTrigger id="contractType" className="w-full">
+                      <SelectValue placeholder="Selecione a UF" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {ufs.map((uf) => (
+                      <SelectItem value={uf.nome} key={uf.sigla}>{uf.nome}</SelectItem>               
+                      ))}
+                    </SelectContent>
+                  </Select>             
+                </div>
+              )}
+            />
+
+
+            <Controller
+              name="cidade"
+              control={control}
+              render={({ field }) => (
+                <div className="space-y-2 flex-1">
+                  <Label htmlFor="cidade">Cidade</Label>
+                  <Input id="cidade" {...field} className="w-full" />
+                </div>
+              )}
+            />
+          </div>
 
           <Controller
             name="dataContrato"
             control={control}
             render={({ field }) => (
-              <DatePicker
-              date={field.value}
-              setDate={(date) => field.onChange(date)}
-            />
+              <div className="space-y-2 flex-1">
+                <Label htmlFor="dataContrato">Data do Contrato</Label>
+                <DatePicker
+                  date={field.value}
+                  setDate={(date) => field.onChange(date)}
+                />
+            </div>
             )}
           />
+
           
+
           <Controller
             name="clausulasAdicionais"
             control={control}

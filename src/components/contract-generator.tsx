@@ -31,7 +31,10 @@ const formSchema = z.object({
   prazo: z.string().min(1, "Prazo é obrigatório"),
   clausulasAdicionais: z.string().optional(),
   cidade: z.string().optional(),
+  uf: z.string().optional(),
   dataContrato: z.date().optional(),
+  dtInicialPrazo: z.date().optional(),
+  dtFinalPrazo: z.date().optional(),
 })
 
 export default function ContractGenerator() {
@@ -50,7 +53,10 @@ export default function ContractGenerator() {
       prazo: '',
       clausulasAdicionais: '',
       cidade: '',
+      uf: '',
       dataContrato: new Date(),
+      dtInicialPrazo: new Date(),
+      dtFinalPrazo: new Date(),
     },
   })
 

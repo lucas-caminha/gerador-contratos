@@ -13,7 +13,9 @@ export interface ContractFormData {
   prazo: string
   clausulasAdicionais: string
   cidade: string
+  uf: string
   dataContrato: Date
-  // Add other form fields as needed
+  dtInicialPrazo : Date
+  dtFinalPrazo : Date
 }
 
