@@ -23,8 +23,8 @@ export function SelectContractType({ control }: SelectContractTypeProps) {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="servicos">Prestação de Serviços</SelectItem>
-              <SelectItem value="locacao">Locação</SelectItem>
-              <SelectItem value="compravenda">Compra e Venda</SelectItem>
+              <SelectItem value="locacao" disabled>Locação (Em Desenvolvimento)</SelectItem>
+              <SelectItem value="compravenda" disabled>Compra e Venda (Em Desenvolvimento)</SelectItem>
             </SelectContent>
           </Select>
         )}

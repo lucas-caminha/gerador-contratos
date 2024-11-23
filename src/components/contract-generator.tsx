@@ -36,6 +36,9 @@ const formSchema = z.object({
   dataContrato: z.date().optional(),
   dtInicialPrazo: z.date().optional(),
   dtFinalPrazo: z.date().optional(),
+  tituloServico: z.string().optional(),
+  descServico: z.string().optional(),
+  enderecoServico: z.string().optional(),
 })
 
 export default function ContractGenerator() {
@@ -58,6 +61,9 @@ export default function ContractGenerator() {
       dataContrato: new Date(),
       dtInicialPrazo: new Date(),
       dtFinalPrazo: new Date(),
+      tituloServico: '',
+      descServico: '',
+      enderecoServico: '',
     },
   })
 

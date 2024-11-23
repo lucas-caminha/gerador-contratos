@@ -18,5 +18,8 @@ export interface ContractFormData {
   dataContrato: Date
   dtInicialPrazo : Date
   dtFinalPrazo : Date
+  tituloServico: string
+  enderecoServico: string
+  descServico: string
 }
 

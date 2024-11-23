@@ -8,12 +8,16 @@ import { DatePicker } from "@/components/ui/date-picker"
 import ufs from '../data/UFS'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { IMaskInput } from 'react-imask'
+import { useState } from 'react'
 
 interface PartyInformationProps {
   control: Control<any>
 }
 
 export function PartyInformation({ control }: PartyInformationProps) {
+
+  const [text, setText] = useState("");
+
   const contratanteTipo = useWatch({
     control,
     name: 'contratanteTipo',
@@ -90,7 +94,7 @@ export function PartyInformation({ control }: PartyInformationProps) {
         <CardHeader>
           <CardTitle>Informações do Contratado</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-2">
           <Controller
             name="contratadoTipo"
             control={control}
@@ -137,6 +141,37 @@ export function PartyInformation({ control }: PartyInformationProps) {
               )}
             />
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+
+        <CardHeader>
+          <CardTitle>Informações do Serviço</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <Controller
+              name="tituloServico"
+              control={control}
+              render={({ field }) => (
+                <div className="space-y-2">
+                  <Label htmlFor="tituloServico">Titulo do Serviço</Label>
+                  <Input id="tituloServico" type='text' {...field} className="w-full" placeholder="Insira aqui um titulo resumido do serviço ex: (Serviço de informatica.)" />
+                </div>
+              )}
+            />
+
+          <Controller
+              name="enderecoServico"
+              control={control}
+              render={({ field }) => (
+                <div className="space-y-2">
+                  <Label htmlFor="enderecoServico">Endereço</Label>
+                  <Input id="enderecoServico" {...field} className="w-full" />
+                </div>
+              )}
+            />
+
         </CardContent>
       </Card>
 
